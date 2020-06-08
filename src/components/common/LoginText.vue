@@ -14,7 +14,7 @@
 export default {
     data() {
         return {
-          content:'',
+          content:''
         }
     },
     components:{
@@ -22,9 +22,17 @@ export default {
     },
     props:['label','type','placeholder','rule'],
     methods:{
-      watch:{
-        content(){
+      // RegExp 对象表示正则表达式，它是对字符串执行模式匹配的强大工具。
+      handlerulg(){
+        const rue = new RegExp(this.rule)
+        if(rue.test(this.content)){
+          this.$emit('inputChange',this.content)
         }
+      },
+    },
+    watch:{
+      content(){
+        this.handlerulg()
       }
     }
 }

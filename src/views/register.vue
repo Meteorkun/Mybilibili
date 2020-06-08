@@ -10,20 +10,23 @@
       type="text"
       rule="^.{6,16}$"
       placeholder="请输入姓名"
+      @inputChange="res => model.name = res"
     />
     <login-text
       label="账号"
       type="text"
       rule="^.{6,16}$"
       placeholder="请输入账号"
+      @inputChange="res =>model.username =res"
     />
     <login-text
       label="密码"
       type="password"
       rule="^.{6,16}$"
       placeholder="请输入密码"
+      @inputChange="res =>model.password =res"
     />
-    <login-btn btnText="注册"></login-btn>
+    <login-btn btnText="注册" @registeSubmit="registeSubmit"></login-btn>
   </div>
 </template>
 
@@ -47,7 +50,24 @@ export default {
       LoginBtn
     },
     methods:{
-
+      async registeSubmit(){
+        // 正则校验
+        let rulg = /^.{6,16}$/
+        if(rulg.test(this.model.name) && rulg.test(this.model.username) && rulg.test(this.model.password)){
+          const res = await this.$http.post('/register',this.model)
+          this.$msg.fail(res.data.msg)
+          console.log(res)
+          if(res.data.code == 200){
+            localStorage.setItem("id",res.data.id)
+            localStorage.setItem("token",res.data.objtoken)
+            setTimeout(()=>{
+              this.$router.push('/userinfo/')
+            },1000)
+          }
+        }else{
+          this.$msg.fail('输入格式有误!')
+        }
+      }
     }
 }
 </script>
