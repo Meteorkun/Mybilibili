@@ -57,6 +57,7 @@ export default {
           const res = await this.$http.post('/register',this.model)
           this.$msg.fail(res.data.msg)
           console.log(res)
+          // 注册完成后跳转到个人中心页面
           if(res.data.code == 200){
             localStorage.setItem("id",res.data.id)
             localStorage.setItem("token",res.data.objtoken)
