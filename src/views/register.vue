@@ -62,7 +62,7 @@ export default {
             localStorage.setItem("id",res.data.id)
             localStorage.setItem("token",res.data.objtoken)
             setTimeout(()=>{
-              this.$router.push('/userinfo/')
+              this.$router.push('/userinfo')
             },1000)
           }
         }else{

@@ -2,7 +2,8 @@
   <div class="userdatail">
     <div>
       <div class="user_img">
-        <img src="@/assets/default_img.jpg" alt="">
+        <img :src="userinfo.user_img" alt="" v-if="userinfo.user_img">
+        <img src="@/assets/default_img.jpg" alt="" v-else >
       </div>
       <div class="user_edit">
         <div>
@@ -25,14 +26,16 @@
       </div>
     </div>
     <div>
-      <h2>用户名：</h2>
-      <p>个性签名</p>
+      <h2>{{userinfo.username}}</h2>
+      <p v-if='userinfo.user_desc'>{{userinfo.user_desc}}</p>
+      <p v-else>这个家伙很懒，什么都没有写。。。</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+    props:['userinfo'],
     data() {
         return {
 
