@@ -1,10 +1,12 @@
 <template>
-  <div>
-    111
+  <div class="userinfo">
+     <nav-bar></nav-bar>
   </div>
 </template>
 
 <script>
+// 引入组件命名要注意
+import NavBar from '@/components/common/Navbar.vue';
 export default {
     data() {
         return {
@@ -12,7 +14,7 @@ export default {
         }
     },
     components:{
-
+      NavBar
     },
     methods:{
 
