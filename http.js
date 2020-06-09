@@ -5,7 +5,7 @@ const http = axios.create({
     baseURL:'http://112.74.99.5:3000/web/api'
 })
 
-
+//请求拦截处理token
 http.interceptors.request.use(function (config) {
     if(localStorage.getItem('token') && localStorage.getItem('id')){
         config.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
@@ -15,6 +15,7 @@ http.interceptors.request.use(function (config) {
     return Promise.reject(error);
   });
 
+//响应拦截处理token
 http.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
