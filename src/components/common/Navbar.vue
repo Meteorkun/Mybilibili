@@ -10,7 +10,8 @@
       </p>
     </div>
     <div>
-      <img src="@/assets/default_img.jpg" alt="">
+      <img :src="imgUrl" alt="" v-if="imgUrl" @click="to">
+      <img src="@/assets/default_img.jpg" alt="" v-else @click="$router.push('/login')">
       <p>下载APP</p>
     </div>
   </div>
@@ -20,14 +21,23 @@
 export default {
     data() {
         return {
-
+          imgUrl:''
         }
     },
-    components:{
-
+    async mounted(){
+      if(localStorage.getItem('token')){
+        const res = await this.$http.get('/user/'+ localStorage.getItem('id'))
+        this.imgUrl = res.data[0].user_img
+      }
     },
     methods:{
-
+      to(){
+        if(this.$route.path != '/userinfo'){
+          this.$router.push('/userinfo')
+        }else{
+          return
+        }
+      }
     }
 }
 </script>
@@ -46,44 +56,45 @@ export default {
         width:100%;
       }
     }
-    div:nth-child(2){
-      display:flex;
-      flex:1;
-      align-items:center;
-      margin:0 5px;
-      p{
-        font-size:12px;
-        background-color:#f4f4f4;
-        height:23px;
-        line-height:23px;
-        padding-left:25px;
-        position:relative;
-        width:100%;
-        border-radius:13px;
+  div:nth-child(2){
+    flex:1;
+    display:flex;
+    align-items:center;
+    margin:0 5px;
+    p{
+      font-size:12px;
+      background-color:#f4f4f4;
+      height:23px;
+      line-height:23px;
+      padding-left:25px;
+      position:relative;
+      width:100%;
+      border-radius:13px;
+      color:#aaa;
+      .ipt-icon{
+        position:absolute;
+        left:10px;
+        top:50%;
+        transform:translate(0,-40%);
         color:#aaa;
-        .ipt-icon{
-          position:absolute;
-          left:10px;
-          margin:5px 0;
-          color:#aaa;
-        }
       }
     }
-    div:nth-child(3){
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      img{
-        width:24px;
-        height:24px;
-      }
-      p{
-        margin:8px;
-        padding:5px 10px;
-        color:white;
-        background-color:#fb7299;
-        border-radius:3px;
-      }
+  }
+  div:nth-child(3){
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    img{
+      width:24px;
+      height:24px;
     }
+    p{
+      padding:5px 10px;
+      background-color:#fb7299;
+      color:white;
+      margin:8px;
+      border-radius:3px;
+    }
+  }
   }
 </style>
