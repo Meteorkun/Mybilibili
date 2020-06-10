@@ -4,6 +4,7 @@ import Home from '@/views/Home'
 import Login from '@/views/Login.vue'
 import register from '@/views/register.vue'
 import userinfo from '@/views/userinfo.vue'
+import edit from '@/views/Edit.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,10 @@ const routes = [
     {
       path: '/userinfo',
       component: userinfo
+    },
+    {
+      path: '/edit',
+      component: edit
     }
   ]
 

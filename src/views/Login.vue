@@ -49,12 +49,12 @@ export default {
           const res = await this.$http.post('/login',this.model)
           this.$msg.fail(res.data.msg)
           console.log(res)
-          // 登录成功后跳转到首页
+          // 登录成功后跳转到个人中心页面
           if(res.data.code == 200){
             localStorage.setItem("id",res.data.id)
             localStorage.setItem("token",res.data.token)
             setTimeout(()=>{
-              this.$router.push('/')
+              this.$router.push('/userinfo')
             },1000)
           }
         }else{
