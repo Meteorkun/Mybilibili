@@ -1,10 +1,25 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="category">
     <nav-bar></nav-bar>
     <div class="categorytab">
-      <van-tabs v-model="active" scrollspy sticky>
+      <van-tabs v-model="active" swipeable sticky animated>
         <van-tab v-for="(item,index) in category" :key="index" :title="item.title">
-          内容 {{ index }}
+          <!-- <van-list
+            v-model="item.loading"
+            :immediate-check="false"
+            :finished="item.finished"
+            finished-text="我也是有底线的"
+            @load="onLoad"
+          > -->
+            <div class="detailparent">
+              <cover
+                class="detailitem"
+                :detailitem="categoryitem"
+                v-for="(categoryitem,categoryindex) in item.list"
+                :key="categoryindex"
+              />
+            </div>
+          <!-- </van-list> -->
         </van-tab>
       </van-tabs>
     </div>
@@ -13,6 +28,7 @@
 
 <script>
 import NavBar from '@/components/common/Navbar.vue'
+import cover from '@/views/cover.vue'
 export default {
     data() {
         return {
@@ -21,13 +37,15 @@ export default {
         }
     },
     components:{
-      NavBar
+      NavBar,
+      cover
     },
     methods:{
       //搜索分类
       async selectCategory(){
         const res = await this.$http.get("/category");
         this.category = this.changeCategory(res.data);
+        this.selectArticle();
       },
       changeCategory(data){
         // 重新改造分类数组
@@ -53,6 +71,11 @@ export default {
             pagesize: categoryitem.pagesize
           }
         });
+        categoryitem.list.push(...res.data);
+        categoryitem.loading = false;
+        if (res.data.length < categoryitem.pagesize) {
+          categoryitem.finished = true;
+        }
       },
       //获取当前所点击的分类id
       categoryItem(){
@@ -65,6 +88,7 @@ export default {
     },
     watch:{
       active(){
+        const categoryitem = this.categoryItem();
         this.selectArticle();
       }
     }
@@ -74,5 +98,14 @@ export default {
 <style lang="less">
   .home{
     background-color:white;
+  }
+  .detailparent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .detailitem {
+      margin: 1.389vw 0;
+      width: 45%;
+    }
   }
 </style>

@@ -5,6 +5,7 @@ import Login from '@/views/Login.vue'
 import register from '@/views/register.vue'
 import userinfo from '@/views/userinfo.vue'
 import edit from '@/views/Edit.vue'
+import cover from '@/views/cover.vue'
 
 Vue.use(Router)
 
