@@ -10,6 +10,10 @@ Vue.prototype.$msg = Toast
 
 // 引入http
 import http from '../http';
+
+//引入图标样式
+import'@/assets/style.css'
+
 Vue.prototype.$http = http
 
 Vue.use(Vant);

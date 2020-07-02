@@ -45,16 +45,16 @@ export default {
         position: relative;
         margin:5px;
          .bottom{
-            padding: 0 2.778vw;
-            margin-bottom: 1.389vw;
-            position: absolute;
-            bottom: 0.556vw;
-            background: linear-gradient(0deg,rgba(0,0,0,.85),transparent);
-            justify-content: space-between;
-            color: white;
-            display: flex;
-            left: 0;
-            right: 0;
+          padding: 0 2.778vw;
+          margin-bottom: 1.389vw;
+          position: absolute;
+          bottom: 0.556vw;
+          background: linear-gradient(0deg,rgba(0,0,0,.85),transparent);
+          justify-content: space-between;
+          color: white;
+          display: flex;
+          left: 0;
+          right: 0;
         }
     }
   }
