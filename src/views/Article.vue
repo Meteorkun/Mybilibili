@@ -60,7 +60,6 @@ export default {
       //获取文章信息
       async articleitemData(){
         const res = await this.$http.get('/article/' + this.$route.params.id)
-        console.log(res.data[0])
         this.model = res.data[0]
       }
     }

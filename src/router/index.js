@@ -15,7 +15,10 @@ Vue.use(Router)
 const routes = [
     {
       path: '/',
-      component: Home
+      component: Home,
+      meta:{
+        keepalive:true
+      }
     },
     {
       path: '/login',
