@@ -1,6 +1,6 @@
 <!-- 首页每篇文章的组件 -->
 <template>
-  <div>
+  <div @click="pathPush" v-if="detailitem">
     <div class="detailItem">
       <div class="imgparent">
         <img :src="detailitem.img" alt="" style="width:100%;height:27.778vw;">
@@ -21,16 +21,12 @@
 <script>
 export default {
     props:['detailitem'],
-    data() {
-        return {
-
-        }
-    },
-    components:{
-
-    },
     methods:{
-
+      pathPush(){
+        if(this.$route.path != `/article/${this.detailitem.id}`) {
+          this.$router.push(`/article/${this.detailitem.id}`)
+        }
+      }
     }
 }
 </script>
