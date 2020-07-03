@@ -4,13 +4,13 @@
     <div class="categorytab">
       <van-tabs v-model="active" swipeable sticky animated>
         <van-tab v-for="(item,index) in category" :key="index" :title="item.title">
-          <!-- <van-list
+          <van-list
             v-model="item.loading"
             :immediate-check="false"
             :finished="item.finished"
             finished-text="我也是有底线的"
             @load="onLoad"
-          > -->
+          >
             <div class="detailparent">
               <cover
                 class="detailitem"
@@ -19,7 +19,7 @@
                 :key="categoryindex"
               />
             </div>
-          <!-- </van-list> -->
+          </van-list>
         </van-tab>
       </van-tabs>
     </div>
@@ -76,6 +76,14 @@ export default {
         if (res.data.length < categoryitem.pagesize) {
           categoryitem.finished = true;
         }
+      },
+      //首页下拉加载更多
+      onLoad() {
+        const categoryitem = this.categoryItem();
+        setTimeout(() => {
+          categoryitem.page += 1;
+          this.selectArticle();
+        }, 1000);
       },
       //获取当前所点击的分类id
       categoryItem(){
