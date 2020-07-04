@@ -46,7 +46,8 @@ import cover from '@/views/cover.vue'
 export default {
     data() {
         return {
-          model:null
+          model:null,
+          commendList:null
         }
     },
     components:{
@@ -55,12 +56,27 @@ export default {
     },
     created(){
       this.articleitemData()
+      this.commendData()
     },
     methods:{
       //获取文章信息
       async articleitemData(){
         const res = await this.$http.get('/article/' + this.$route.params.id)
         this.model = res.data[0]
+      },
+      //获取推荐文章数据
+      async commendData(){
+        const res = await this.$http.get('/commend/')
+        this.commendList = res.data
+      }
+    },
+    //监听推荐文章点击后路径变化
+    watch:{
+      $route(){
+        this.articleitemData()
+        this.commendData()
+        // this.collectionInit()
+        // this.subscriptionInit()
       }
     }
 }
